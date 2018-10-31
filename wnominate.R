@@ -17,19 +17,24 @@ library(wnominate)
 # 2) Party
 # 3) Voting for the applicable policy of the member of parliament
 data(UN) 
+UN
 UN<-as.matrix(UN) 
 UN[1:5,1:6]  
 
+d <- read.csv(file="~/develop/wnominate/votes.csv", header=F)
+d
+d <- as.matrix(d)
+d[1:5, 1:6]
 
 # 4. Remove additional information except voting information.
 # The wnominate Only voting data is required to obtain a value.
 # Remove unnecessary Colunm.
 # However, It will be needed to use it again later. Therefore, save it in another variable.
-UNnames<-UN[,1] # Name of countries (or lawmakers) (index 1).
-legData<-matrix(UN[,2],length(UN[,2]),1) # Party (index 2).
-colnames(legData)<-"party" 
-UN<-UN[,-c(1,2)]
-show(UN)
+lawmakerId <- d[,1] # Name of countries (or lawmakers) (index 1).
+# legData<-matrix(d[,2],length(UN[,2]),1) # Party (index 2). -> no party data
+# colnames(legData)<-"party" 
+d<-d[,-c(1)] # if there are party data -> -c(1,2)
+show(d)
 
 
 # 5. Map voting information.
